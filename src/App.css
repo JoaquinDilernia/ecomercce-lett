@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gabarito', cursive;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  height: auto;
+  color: black;
+}
+
+.banner {
+  width: 30%;
+  height: 300px;
+  border-radius: 1rem;
+  background-image: cover;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+
+.search input {
+  width: 350px;
+  height: 40px;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.products-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.product-card {
+  height: 60%;
+  width: 70%;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+}
+
+.product-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: start;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  border-radius: 1rem;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.medidas-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.medidas-cont p {
+  font-size: 0.8rem;
+  margin: 10px;
+}
+
+.info {
+  font-size: 15px;
+  margin: 10px;
+}
+
+.Precio-lista span {
+  font-size: 1.5rem;
+}
+
+.Precio-efectivo span {
+  font-size: 1.5rem;
+}
+
+.product-body {
+  height: 20%;
+  width: 40%;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-body img {
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.product-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  margin: 10px;
+}
+
+.loading {
+  font-size: 1.2rem;
+  margin: 10px;
+}
+
+.loading span {
+  color: black;
+}
+@media screen and (max-width: 900px) {
+  .product-card {
+    width: 80%;
+  }
+  .banner {
+    width: 70%;
+  }
+}
+
