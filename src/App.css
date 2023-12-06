@@ -12,152 +12,151 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+
+background-image: url(./assets/fondo.jpg);
   height: auto;
-  color: black;
-}
 
-.banner {
-  width: 30%;
-  height: 300px;
-  border-radius: 1rem;
-  background-image: cover;
 }
-
-.banner img {
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-}
-
 .search {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
   justify-content: center;
-}
-
+  height: auto;
+  margin-top: 20px;
+} 
 .search input {
-  width: 350px;
+  width: 300px;
   height: 40px;
-  border-radius: 0.5rem;
-  border: none;
-  outline: none;
+  border-radius: 1rem;
+  border: 1px solid #000;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .products-contenedor {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin: 10px;
+  width: 80%;
+
+
 }
 
-.product-card {
-  height: 60%;
-  width: 70%;
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 20px;
+.product-card{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  margin: 20px;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid black;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 20px;
+  background-color: #ffff;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  padding: 10px;
 }
 
 .product-header {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
   align-items: center;
-  justify-content: start;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+.porcentaje {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: #ffff;
+  padding: 5px;
+  border-radius: 0 0 0 1rem;
+}
+
+.porcentaje p {
+font-size: 1.2rem;
+font-weight: bold;
+}
+
+.product-header h5 {
   font-size: 1.2rem;
-  margin-bottom: 20px;
-  border-radius: 1rem;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border: 1px solid black;
+  font-weight: bold;
+  margin: 5px;
 }
 
-.medidas-cont {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.medidas-cont p {
-  font-size: 0.8rem;
-  margin: 10px;
-}
-
-.info {
-  font-size: 15px;
-  margin: 10px;
-}
-
-.Precio-lista span {
-  font-size: 1.5rem;
-}
-
-.Precio-efectivo span {
-  font-size: 1.5rem;
-}
-
-.product-body {
-  height: 20%;
-  width: 40%;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-.product-body img {
-  height: 100%;
-  width: 100%;
-  border-radius: 1rem;
-}
-
-.product-footer {
+.product-body{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  margin: 10px;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+
 }
 
-.error {
+.cont-precios{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+
+}
+
+.Precio-lista-tachado {
+  text-decoration: line-through;
+  font-size: 1.2rem;
+}
+
+.Precio-lista{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.Precio-descuento{
+  font-size: 1.2rem;
+  font-weight: bold;
   color: red;
-  font-size: 1.2rem;
-  margin: 10px;
 }
 
-.loading {
+
+
+.Precio-efectivo{
   font-size: 1.2rem;
-  margin: 10px;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-bottom: 30px;
 }
 
-.loading span {
-  color: black;
+.product-footer-medidas{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  border-top: 1px solid #000;
 }
-@media screen and (max-width: 900px) {
-  .product-card {
-    width: 80%;
-  }
-  .banner {
-    width: 70%;
-  }
+
+.medidas-cont{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.product-footer-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  border-top: 1px solid #000;
 }
 
