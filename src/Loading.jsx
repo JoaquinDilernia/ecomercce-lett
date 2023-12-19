@@ -1,13 +1,20 @@
 
 import  React  from  'react' ;
 
+import './App.css' ;
+
 
 
 const  Loading  = () =>  {
     return  (
-        <div className = "loading" >
-            <span>Cargando...</span>
-        </div>
+<div class="sk-chase">
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+</div>
     )
 }
 
