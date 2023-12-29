@@ -8,9 +8,11 @@ function App() {
   const [search, setSearch] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [error, setError] = useState(false);
+  const [cant, setCant] = useState(5);
+
 
   useEffect(() => {
-    fetch("https://apimocha.com/apilett/posts")
+    fetch("https://mockly.app/api/ab761266-af2d-4739-a5aa-57f64ff411dd/pick")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -48,12 +50,7 @@ function App() {
   // Habilitar el seguro para no bloquear la pantalla
   document.addEventListener("touchstart", enableNoSleep, false);
 
-
-  // funcion para cuenta regresiva de 5 segundos para volver a buscar producto, cuando termine se reinicia el contador
-
-
-  const [cant, setCant] = useState(5);
-
+  // Contador para volver a buscar
   useEffect(() => {
     const interval = setInterval(() => {
       setCant(cant - 1);
@@ -66,6 +63,8 @@ function App() {
     }
     return () => clearInterval(interval);
   });
+
+   
 
   return (
     <>
