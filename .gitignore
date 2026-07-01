@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+pedidos-lett-2-firebase-adminsdk-*.json
+.env
+.env.local
+.env.*.local
