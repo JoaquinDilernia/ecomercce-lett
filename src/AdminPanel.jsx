@@ -271,8 +271,8 @@ function AdminPanel() {
           {lastSync && (
             <p className="sync-last">
               Último sync:{' '}
-              {lastSync.updatedAt?.toDate
-                ? lastSync.updatedAt.toDate().toLocaleString('es-AR')
+              {lastSync.updatedAt?._seconds
+                ? new Date(lastSync.updatedAt._seconds * 1000).toLocaleString('es-AR')
                 : 'hace un momento'}
               {' — '}{lastSync.synced} productos
             </p>
