@@ -26,3 +26,10 @@ pedidos-lett-2-firebase-adminsdk-*.json
 .env
 .env.local
 .env.*.local
+
+# Odoo data exports / exploration scripts (not production code)
+data.json
+odoo-explore*.mjs
+
+# Old backup files
+src/_backup/

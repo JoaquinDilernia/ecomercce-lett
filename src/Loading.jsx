@@ -1,16 +1,11 @@
 import React from "react";
-
 import "./App.css";
 
-const Loading = () => {
+const Loading = ({ message = "Cargando..." }) => {
   return (
-    <div class="sk-chase">
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
-      <div class="sk-chase-dot"></div>
+    <div className="loading-container">
+      <div className="modern-loader"></div>
+      <p className="loading-text">{message}</p>
     </div>
   );
 };

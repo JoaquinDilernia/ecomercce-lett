@@ -1,0 +1,624 @@
+/* ====================================================
+   PRICES PAGE — Light theme (combinado con Pick)
+   ==================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── App shell ── */
+.prices-app {
+  position: fixed;
+  inset: 0;
+  background: #f8fafc;
+  color: #1f2937;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Input oculto (scanner físico) ── */
+.prices-hidden-input {
+  position: fixed;
+  top: -300px;
+  left: -300px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ======================================================
+   CÁMARA
+   ====================================================== */
+
+.scanner-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.scanner-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay semitransparente con "hueco" */
+.scanner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding-bottom: 18vh;
+}
+
+.scanner-frame {
+  position: relative;
+  width: min(76vw, 320px);
+  height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.60);
+}
+
+/* Esquinas azules (color Pick) */
+.corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #2563eb;
+  border-style: solid;
+  border-width: 0;
+}
+.corner.tl { top: -2px; left: -2px;   border-top-width: 3px; border-left-width: 3px;   border-radius: 5px 0 0 0; }
+.corner.tr { top: -2px; right: -2px;  border-top-width: 3px; border-right-width: 3px;  border-radius: 0 5px 0 0; }
+.corner.bl { bottom: -2px; left: -2px;  border-bottom-width: 3px; border-left-width: 3px;  border-radius: 0 0 0 5px; }
+.corner.br { bottom: -2px; right: -2px; border-bottom-width: 3px; border-right-width: 3px; border-radius: 0 0 5px 0; }
+
+/* Línea de escaneo azul */
+.scan-line {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(37, 99, 235, 0.4) 15%,
+    #2563eb 40%,
+    #60a5fa 60%,
+    rgba(96, 165, 250, 0.4) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 6px rgba(37, 99, 235, 0.8),
+    0 0 18px rgba(37, 99, 235, 0.35);
+  animation: scanBounce 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes scanBounce {
+  0%   { top: 6px; }
+  48%  { top: calc(100% - 8px); }
+  52%  { top: calc(100% - 8px); }
+  100% { top: 6px; }
+}
+
+.scan-locked {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1.5px solid rgba(16, 185, 129, 0.5);
+}
+
+/* Hint inferior de cámara */
+.scanner-hint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 24px 24px 44px;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  text-align: center;
+  pointer-events: none;
+}
+.scanner-hint p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.01em;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
+
+.prices-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: env(safe-area-inset-top, 16px) 18px 14px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+  background: rgba(255, 255, 255, 0.90);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #1f2937;
+}
+
+.header-countdown {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 100px;
+  padding: 2px 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-toggle,
+.btn-reset {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 100px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-toggle:active,
+.btn-reset:active {
+  transform: scale(0.95);
+}
+
+.btn-reset {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+/* Banner error de cámara */
+.camera-error-banner {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 64px);
+  left: 16px;
+  right: 16px;
+  z-index: 20;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  color: #dc2626;
+  text-align: center;
+}
+
+/* ======================================================
+   MODO MANUAL (IDLE)
+   ====================================================== */
+
+.manual-idle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 40px 32px;
+  background: #f8fafc;
+}
+
+.manual-icon-wrap {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  color: #2563eb;
+  margin-bottom: 8px;
+}
+
+.manual-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: -0.01em;
+}
+
+.manual-hint {
+  font-size: 0.88rem;
+  color: #6b7280;
+  text-align: center;
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+.manual-tap {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* ======================================================
+   LOADING
+   ====================================================== */
+
+.prices-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #f8fafc;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2.5px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.prices-loading p {
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+/* ======================================================
+   RESULT / ERROR SHEET
+   ====================================================== */
+
+.result-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #ffffff;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 18px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+  animation: sheetUp 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 82dvh;
+  overflow-y: auto;
+}
+
+/* Barra gradiente superior (igual que product-card) */
+.result-sheet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #f97316);
+  border-radius: 20px 20px 0 0;
+}
+
+@keyframes sheetUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.sheet-handle {
+  width: 38px;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  margin: 6px auto 16px;
+}
+
+/* ── Fila de producto ── */
+.result-product-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.result-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f3f4f6;
+  flex-shrink: 0;
+  border: 1px solid #e5e7eb;
+}
+
+.result-product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.hot-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  border-radius: 100px;
+  padding: 3px 9px;
+}
+
+.result-desc {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1f2937;
+  line-height: 1.45;
+}
+
+.result-sku-chip {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.7rem;
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 3px 9px;
+}
+
+/* ── Grilla de precios ── */
+.prices-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.price-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card.full-width {
+  grid-column: span 2;
+}
+
+.pc-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+}
+
+.pc-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: #1f2937;
+}
+
+.pc-badge {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 100px;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  margin-top: 2px;
+}
+
+/* Card: precio lista (tachado) */
+.card-before {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.pc-strike {
+  color: #9ca3af;
+  text-decoration: line-through;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Card: precio oferta */
+.card-offer {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.card-offer .pc-label {
+  color: #3b82f6;
+}
+
+.pc-blue {
+  color: #2563eb;
+}
+
+/* Card: efectivo */
+.card-cash {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.card-cash .pc-label {
+  color: #ea580c;
+}
+
+.pc-orange {
+  color: #f97316;
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+}
+
+/* ── Perks ── */
+.result-perks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.perk {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.perk-dot {
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+/* ======================================================
+   ERROR SHEET
+   ====================================================== */
+
+.error-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 8px;
+  text-align: center;
+}
+
+.error-circle {
+  width: 68px;
+  height: 68px;
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.error-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ef4444;
+  letter-spacing: -0.02em;
+}
+
+.error-hint {
+  font-size: 0.85rem;
+  color: #6b7280;
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+.btn-retry {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 100px;
+  padding: 10px 26px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-retry:active {
+  transform: scale(0.96);
+  background: #dbeafe;
+}
+
+/* ======================================================
+   TABLET
+   ====================================================== */
+
+@media (min-width: 520px) {
+  .result-sheet {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px 20px 0 0;
+  }
+
+  @keyframes sheetUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(100%); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .prices-header {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 100%;
+  }
+}
