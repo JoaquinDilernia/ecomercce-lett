@@ -423,6 +423,11 @@ body {
   margin-bottom: 0.25rem;
 }
 
+.text-ef.text-transf,
+.precio-efectivo.precio-transf {
+  color: #059669;
+}
+
 .precio-efectivo {
   font-size: 1rem;
   font-weight: 800;

@@ -3,6 +3,7 @@ import { useZxing } from "react-zxing";
 import "./Prices.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+import { getPrices, pctLabel, DESC_EFECTIVO, DESC_TRANSFERENCIA } from "./pricing";
 
 const CACHE_KEY = "pickalto_prices_cache";
 const CACHE_TTL = 2 * 60 * 60 * 1000; // 2 horas
@@ -245,6 +246,7 @@ function Prices() {
   }
 
   const showResult = (foundProduct || error) && isLocked;
+  const prices = foundProduct ? getPrices(foundProduct) : null;
 
   return (
     <div className="prices-app">
@@ -379,39 +381,41 @@ function Prices() {
           </div>
 
           <div className="prices-grid">
-            {foundProduct.Descuento === "SI" ? (
+            {prices.hasOferta ? (
               <>
                 <div className="price-card card-before">
                   <span className="pc-label">Precio lista</span>
-                  <span className="pc-value pc-strike">{foundProduct.Precio}</span>
-                  {foundProduct.Porcentaje && (
-                    <span className="pc-badge">{foundProduct.Porcentaje} OFF</span>
-                  )}
+                  <span className="pc-value pc-strike">{prices.lista}</span>
+                  <span className="pc-badge">{prices.porcentajeOferta} OFF</span>
                 </div>
                 <div className="price-card card-offer">
                   <span className="pc-label">Precio oferta</span>
-                  <span className="pc-value pc-blue">{foundProduct.Pdesceunto}</span>
+                  <span className="pc-value pc-blue">{prices.oferta}</span>
                 </div>
               </>
             ) : (
               <div className="price-card card-offer full-width">
                 <span className="pc-label">Precio</span>
-                <span className="pc-value pc-blue">{foundProduct.Precio}</span>
+                <span className="pc-value pc-blue">{prices.lista || "Consultar"}</span>
               </div>
             )}
 
-            <div className="price-card card-cash full-width">
-              <span className="pc-label">Efectivo · 15% off</span>
-              <span className="pc-value pc-orange">
-                {foundProduct.Efecivo || foundProduct.Efectivo || "Consultar"}
-              </span>
+            <div className="price-card card-cash">
+              <span className="pc-label">Efectivo · {pctLabel(DESC_EFECTIVO)} off</span>
+              <span className="pc-value pc-orange">{prices.efectivo || "Consultar"}</span>
+            </div>
+            <div className="price-card card-transfer">
+              <span className="pc-label">Transferencia · {pctLabel(DESC_TRANSFERENCIA)} off</span>
+              <span className="pc-value pc-green">{prices.transferencia || "Consultar"}</span>
             </div>
           </div>
 
           <div className="result-perks">
             <span className="perk">✓ 3 cuotas sin interés</span>
             <span className="perk-dot">·</span>
-            <span className="perk">✓ 15% off efectivo</span>
+            <span className="perk">✓ {pctLabel(DESC_EFECTIVO)} off efectivo</span>
+            <span className="perk-dot">·</span>
+            <span className="perk">✓ {pctLabel(DESC_TRANSFERENCIA)} off transferencia</span>
           </div>
         </div>
       )}
