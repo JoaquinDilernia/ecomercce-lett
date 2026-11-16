@@ -1,6 +1,6 @@
 // Descuentos por medio de pago (se aplican sobre el precio vigente:
 // precio oferta si el producto tiene descuento, si no precio lista)
-export const DESC_EFECTIVO = 0.15;
+export const DESC_EFECTIVO = 0.25;
 export const DESC_TRANSFERENCIA = 0.20;
 
 // "$ 99.990,00" | 99990 → 99990
