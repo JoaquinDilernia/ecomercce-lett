@@ -1,0 +1,13 @@
+<IfModule mod_headers.c>
+  # index.html nunca se cachea: así cada deploy nuevo se ve al instante
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # assets/ tienen hash en el nombre (index-xxxx.js) → se pueden cachear para siempre
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
